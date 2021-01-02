@@ -60,14 +60,14 @@ const prms = {
 ////////////////////////////////////////////////////////////////////////
 //                      Welcome Instructionsi                         //
 ////////////////////////////////////////////////////////////////////////
-const task_instructions_general = {
+const instructions_general = {
   type: "html-keyboard-response",
   stimulus: generate_formatted_html({
     text: `Welcome: <br><br>Your task is to respond to single words presented in the centre of the screen according to word category.
-    You will respond using the "E" and "I" keys with your left and right index fingers, respectively. The word category and 
-    response key assignment will be indicated to you before each block of trials. Read the instructions carefully. Respond
-    as quickly and as accurately as possible! <br><br>
-      Press the spacebar to continue!`,
+               You will respond using the "E" and "I" keys with your left and right index fingers, respectively. The word category and 
+               response key assignment will be indicated to you before each block of trials. Read the instructions carefully. Respond
+               as quickly and as accurately as possible! <br><br>
+               Press the spacebar to continue!`,
     fontsize: 48,
     lineheight: 1.5,
     align: "left",
@@ -79,8 +79,13 @@ const task_instructions_general = {
   post_trial_gap: prms.waitDur,
 };
 
-let nVersion = 1;
-let resp_key_block1;
+////////////////////////////////////////////////////////////////////////
+//                     Versions/Response Mapping                      //
+////////////////////////////////////////////////////////////////////////
+
+let nVersion = 1; // TO DO
+let resp_key_e;
+let resp_key_i;
 if (nVersion === 1) {
   resp_key_e = ["real", "concrete"];
   resp_key_i = ["imaginary", "abstract"];
@@ -89,69 +94,99 @@ if (nVersion === 1) {
   resp_key_i = ["real", "abstract"];
 }
 
-const task_instructions_practice_block1 = {
-  type: "html-keyboard-response",
-  stimulus: generate_formatted_html({
-    text: `Block 1: <br><br>The following block consists of 16 training trials. Respond according the the word category: "real" vs. "imaginary" with the following key assignment:<br><br>
-      E key = "${resp_key_e[0]}"<br>I key = "${resp_key_i[0]}"
-      <br><br>Press the spacebar to continue!`,
-    fontsize: 48,
-    lineheight: 1.5,
-    align: "left",
-    bold: true,
-    color: "blue",
-    width: "1800px",
-  }),
-  choices: prms.contKeys,
-  post_trial_gap: prms.waitDur,
+// need to switch mapping after block 4
+function switch_resp_key() {
+  let tmp = resp_key_e[0];
+  resp_key_e[0] = resp_key_i[0];
+  resp_key_i[0] = tmp;
+}
+
+////////////////////////////////////////////////////////////////////////
+//                    Task + Response Instructions                    //
+////////////////////////////////////////////////////////////////////////
+let task_instructions = {
+  Block1: `Block 1: <br><br>The following block consists of 16 training trials. Respond according the the word category: "real" vs. "imaginary" with the following key assignment:<br><br>`,
+  Block2: `Block 2: <br><br>The following block consists of 16 training trials. Respond according the the word category: "abstract" vs. "concrete" with the following key assignment:<br><br>`,
+  Block3: `Block 3: <br><br>The following block consists of 16 training trials. Respond according the the word categories: "real" vs. "imaginary" and  "abstract" vs. "concrete" and with the following key assignment:<br><br>`,
+  Block4: `Block 4: <br><br>The following block consists of 32 real trials. Respond according the the word categories: "real" vs. "imaginary" and  "abstract" vs. "concrete" and with the following key assignment:<br><br>`,
+  Block5: `Block 5: <br><br>The following block consists of 16 training trials. Respond according the the word categories: "real" vs. "imaginary" with the following key assignment:<br><br>`,
+  Block6: `Block 6: <br><br>The following block consists of 16 training trials. Respond according the the word categories: "real" vs. "imaginary" and  "abstract" vs. "concrete" and with the following key assignment:<br><br>`,
+  Block7: `Block 7: <br><br>The following block consists of 32 real trials. Respond according the the word categories: "real" vs. "imaginary" and  "abstract" vs. "concrete" and with the following key assignment:<br><br>`,
 };
 
-const task_instructions_practice_block2 = {
+function resp_instructions(nBlk) {
+  let txt = {
+    Block1: `E key = "${resp_key_e[0]}"<br>I key = "${resp_key_i[0]}" <br><br>Press the spacebar to continue!`,
+    Block2: `E key = "${resp_key_e[1]}"<br>I key = "${resp_key_i[1]}" <br><br>Press the spacebar to continue!`,
+    Block3: `E key = "${resp_key_e[0]}"/"${resp_key_e[1]}"<br>I key = "${resp_key_i[0]}"/"${resp_key_i[1]}"<br><br>Press the spacebar to continue!`,
+    Block4: `E key = "${resp_key_e[0]}"/"${resp_key_e[1]}"<br>I key = "${resp_key_i[0]}"/"${resp_key_i[1]}"<br><br>Press the spacebar to continue!`,
+    Block5: `E key = "${resp_key_e[0]}"<br>I key = "${resp_key_i[0]}" <br><br>Press the spacebar to continue!`,
+    Block6: `E key = "${resp_key_e[0]}"/"${resp_key_e[1]}"<br>I key = "${resp_key_i[0]}"/"${resp_key_i[1]}"<br><br>Press the spacebar to continue!`,
+    Block7: `E key = "${resp_key_e[0]}"/"${resp_key_e[1]}"<br>I key = "${resp_key_i[0]}"/"${resp_key_i[1]}"<br><br>Press the spacebar to continue!`,
+  };
+  return txt["Block" + nBlk];
+}
+
+const instructions = {
   type: "html-keyboard-response",
-  stimulus: generate_formatted_html({
-    text: `Block 2: <br><br>The following block consists of 16 training trials. Respond according the the word category: "abstract" vs. "concrete" with the following key assignment:<br><br>
-      E key = "${resp_key_e[1]}"<br>I key = "${resp_key_i[1]}"
-      <br><br>Press the spacebar to continue!`,
-    fontsize: 48,
-    lineheight: 1.5,
-    align: "left",
-    bold: true,
-    color: "blue",
-    width: "1800px",
-  }),
+  stimulus: "",
   choices: prms.contKeys,
   post_trial_gap: prms.waitDur,
+  on_start: function (trial) {
+    if (prms.cBlk === 5) {
+      switch_resp_key();
+    }
+    trial.stimulus = generate_formatted_html({
+      text:
+        task_instructions["Block" + prms.cBlk] + resp_instructions(prms.cBlk),
+      fontsize: 48,
+      lineheight: 1.5,
+      align: "left",
+      bold: true,
+      color: "blue",
+      width: "1800px",
+    });
+  },
 };
+
+////////////////////////////////////////////////////////////////////////
+//                     Block/Trial Feedback                           //
+////////////////////////////////////////////////////////////////////////
 
 function blockFeedbackTxt(filter_options) {
   "use strict";
   let dat = jsPsych.data
     .get()
     .filter({ ...filter_options, blockNum: prms.cBlk });
-  // let nError = dat.select("error").values.filter(function (x) {
-  //   return x !== 0;
-  // }).length;
-
   let nTotal = dat.count();
   let nError = dat.select("error").sum();
-  let meanRT = dat.select("rt").mean();
-  let meanER = Math.round((nError / nTotal) * 100);
+  let meanRT = Math.round(dat.select("rt").mean());
+  let errorRate = Math.round((nError / nTotal) * 100);
 
-  let blockFbTxt =
-    "<H1>Block: " +
-    prms.cBlk +
-    " of " +
-    prms.nBlks +
-    "</H1><br>" +
-    "<H1>Mean RT: " +
-    meanRT +
-    " ms </H1>" +
-    "<H1>Error Rate: " +
-    meanER +
-    " %</H1><br>" +
-    "<H2>Press any key to continue the experiment!</H2>";
+  let txt = generate_formatted_html({
+    text:
+      `Block: ` +
+      prms.cBlk +
+      ` of ` +
+      prms.nBlks +
+      `<br>Mean RT: ` +
+      meanRT +
+      ` ms` +
+      `<br>Error Rate: ` +
+      errorRate +
+      ` %` +
+      `<br><br>Press any key to continue!`,
+    fontsize: 48,
+    lineheight: 1.5,
+    align: "center",
+    bold: true,
+    color: "blue",
+    width: "1800px",
+  });
+
   prms.cBlk += 1;
-  return blockFbTxt;
+
+  return txt;
 }
 
 const blk_feedback = {
@@ -163,6 +198,26 @@ const blk_feedback = {
     trial.stimulus = blockFeedbackTxt({ stim: "iat" });
   },
 };
+
+function codeTrial() {
+  let dat = jsPsych.data.get().last(1).values()[0];
+
+  let error = 0;
+  let key = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(dat.key_press);
+  if (key === "e" && !resp_key_e.includes(dat.category)) {
+    error = 1;
+  } else if (key === "i" && !resp_key_i.includes(dat.category)) {
+    error = 1;
+  }
+
+  jsPsych.data.addDataToLastTrial({
+    date: Date(),
+    error: error,
+    blockNum: prms.cBlk,
+    trialNum: prms.cTrl,
+  });
+  prms.cTrl += 1;
+}
 
 ////////////////////////////////////////////////////////////////////////
 //                              Stimuli                               //
@@ -188,41 +243,13 @@ const stimuli = [
     {"word": "defined",   "category": "concrete"},
 ];
 
-const stimuli_block1 = stimuli.filter(function (stim) {
-  return stim.category == "real" || stim.category == "imaginary";
-});
-
-const stimuli_block2 = stimuli.filter(function (stim) {
-  return stim.category == "abstract" || stim.category == "concrete";
-});
-
-////////////////////////////////////////////////////////////////////////
-//                          jsPsych Objects                           //
-////////////////////////////////////////////////////////////////////////
-
-function codeTrial() {
-  let dat = jsPsych.data.get().last(1).values()[0];
-
-  let error = 0;
-  let key = jsPsych.pluginAPI.convertKeyCodeToKeyCharacter(dat.key_press);
-  if (key === "e") {
-    if (!resp_key_e.includes(dat.category)) {
-      error = 1;
-    }
-  } else if (key === "i") {
-    if (!resp_key_i.includes(dat.category)) {
-      error = 1;
-    }
-  }
-
-  jsPsych.data.addDataToLastTrial({
-    date: Date(),
-    error: error,
-    blockNum: prms.cBlk,
-    trialNum: prms.cTrl,
-  });
-  prms.cTrl += 1;
-}
+// const stimuli_block1 = stimuli.filter(function (stim) {
+//     return stim.category == "real" || stim.category == "imaginary";
+// });
+//
+// const stimuli_block2 = stimuli.filter(function (stim) {
+//     return stim.category == "abstract" || stim.category == "concrete";
+// });
 
 const iat_stimulus = {
   type: "html-keyboard-response",
@@ -259,16 +286,8 @@ const error_instructions = {
   post_trial_gap: prms.iti,
   choices: prms.contKeys,
   on_start: function (trial) {
-    let txt;
-    if (prms.cBlk === 1) {
-      txt = `E key = "${resp_key_e[0]}"<br>I key = "${resp_key_i[0]}"<br><br>
-                      Press the spacebar to continue!`;
-    } else if (prms.cBlk === 2) {
-      txt = `E key = "${resp_key_e[1]}"<br>I key = "${resp_key_i[1]}"<br><br>
-                        Press the spacebar to continue!`;
-    }
     trial.stimulus = generate_formatted_html({
-      text: txt,
+      text: resp_instructions(prms.cBlk),
       fontsize: 48,
       lineheight: 1.5,
       align: "center",
@@ -324,34 +343,43 @@ function genExpSeq() {
 
   exp.push(fullscreen_on);
   exp.push(hideMouseCursor);
-  exp.push(welcome_en);
   // exp.push(vpInfoForm_en);
 
   // general instructions
-  exp.push(task_instructions_general);
+  exp.push(instructions_general);
 
   let blk_timeline;
+  let stim;
+  let reps;
+  for (let blk = 1; blk <= prms.nBlks; blk++) {
+    if (blk == 1 || blk == 5) {
+      reps = 2;
+      stim = stimuli.filter(function (stim) {
+        return stim.category == "real" || stim.category == "imaginary";
+      });
+    } else if (blk == 2 || blk == 6) {
+      reps = 2;
+      stim = stimuli.filter(function (stim) {
+        return stim.category == "abstract" || stim.category == "concrete";
+      });
+    } else {
+      reps = 4;
+      stim = stimuli;
+    }
 
-  // block 1
-  exp.push(task_instructions_practice_block1);
-  blk_timeline = {
-    timeline: [iat_stimulus, if_error, iti],
-    timeline_variables: stimuli_block1,
-    randomize_order: true,
-    repetitions: 2,
-  };
-  exp.push(blk_timeline);
-  exp.push(blk_feedback);
-
-  // block 2
-  exp.push(task_instructions_practice_block2);
-  blk_timeline = {
-    timeline: [iat_stimulus, if_error, iti],
-    timeline_variables: stimuli_block2,
-    randomize_order: true,
-    repetitions: 2,
-  };
-  exp.push(blk_timeline);
+    exp.push(instructions);
+    blk_timeline = {
+      timeline: [iat_stimulus, if_error, iti],
+      timeline_variables: stim,
+      sample: {
+        type: "without-replacement",
+      },
+      randomize_order: true,
+      repetitions: reps,
+    };
+    exp.push(blk_timeline);
+    exp.push(blk_feedback);
+  }
 
   exp.push(save_data);
   exp.push(debrief_en);
