@@ -168,12 +168,10 @@ const save_data = {
   type: "call-function",
   func: function () {
     let data_filename = dirName + "data/" + expName + "_" + vpNum;
-    saveData(
-      "/Common/write_data_json.php",
-      data_filename,
-      [{ stim: "mouse_flanker" }, { stim: "posner_target" }],
-      "json"
-    );
+    saveData("/Common/write_data_json.php", data_filename, [
+      { stim: "posner_cue" },
+      { stim: "posner_target" },
+    ]);
   },
   timing_post_trial: 200,
 };
@@ -203,6 +201,7 @@ function genExpSeq() {
     exp.push(block_feedback); // show previous block performance
   }
 
+  exp.push(save_data);
   exp.push(debrief_en);
   exp.push(fullscreen_off);
   exp.push(showMouseCursor);

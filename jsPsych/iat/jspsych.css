@@ -41,15 +41,15 @@
 }
 
 /* fonts and type */
-
 .jspsych-display-element {
   font-family: "Open Sans", "Arial", sans-serif;
   font-size: 18px;
+  color: #fff;
   line-height: 1.6em;
+  background-color: #000000;
 }
 
 /* Form elements like input fields and buttons */
-
 .jspsych-display-element input[type="text"] {
   font-family: "Open Sans", "Arial", sans-serif;
   font-size: 14px;
