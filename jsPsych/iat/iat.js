@@ -243,14 +243,6 @@ const stimuli = [
     {"word": "defined",   "category": "concrete"},
 ];
 
-// const stimuli_block1 = stimuli.filter(function (stim) {
-//     return stim.category == "real" || stim.category == "imaginary";
-// });
-//
-// const stimuli_block2 = stimuli.filter(function (stim) {
-//     return stim.category == "abstract" || stim.category == "concrete";
-// });
-
 const iat_stimulus = {
   type: "html-keyboard-response",
   stimulus: "",
