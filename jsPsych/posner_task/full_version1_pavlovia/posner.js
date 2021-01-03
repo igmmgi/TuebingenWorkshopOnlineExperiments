@@ -7,6 +7,10 @@ const expName = getFileName();
 const dirName = getDirName();
 const vpNum = genVpNum();
 
+// Can't use PHP code on Pavlovia?
+const version = getVersionNumber(vpNum, 4);
+console.log(version);
+
 ////////////////////////////////////////////////////////////////////////
 //                           Exp Parameters                           //
 ////////////////////////////////////////////////////////////////////////
@@ -160,12 +164,26 @@ const save_data = {
 };
 
 ////////////////////////////////////////////////////////////////////////
+//                        Pavlovia Interaction                        //
+////////////////////////////////////////////////////////////////////////
+const pavolvia_init = {
+  type: "pavlovia",
+  command: "init",
+};
+
+const pavolvia_finish = {
+  type: "pavlovia",
+  command: "finish",
+};
+
+////////////////////////////////////////////////////////////////////////
 //                    Generate and run experiment                     //
 ////////////////////////////////////////////////////////////////////////
 function genExpSeq() {
   "use strict";
 
   let exp = [];
+  exp.push(pavolvia_init);
 
   exp.push(fullscreen_on);
   exp.push(hideMouseCursor);
@@ -184,10 +202,11 @@ function genExpSeq() {
     exp.push(block_feedback); // show previous block performance
   }
 
-  exp.push(save_data);
   exp.push(debrief_en);
   exp.push(fullscreen_off);
   exp.push(showMouseCursor);
+
+  exp.push(pavolvia_finish);
 
   return exp;
 }
@@ -197,5 +216,4 @@ jsPsych.init({
   timeline: EXP,
   show_progress_bar: false,
   preload_images: imgs,
-  override_safe_mode: true,
 });

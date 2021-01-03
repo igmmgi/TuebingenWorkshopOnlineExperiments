@@ -38,6 +38,12 @@ function genVpNum() {
   return num;
 }
 
+function getComputerInfo() {
+  "use strict";
+  let pc_info = navigator.userAgent;
+  jsPsych.data.addProperties({ pc_info: pc_info });
+}
+
 function getVersionNumber(num, numberOfVersions) {
   // assign version number
   return (num % numberOfVersions) + 1;
