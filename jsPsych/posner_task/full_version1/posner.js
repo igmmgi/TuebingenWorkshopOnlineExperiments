@@ -197,5 +197,4 @@ jsPsych.init({
   timeline: EXP,
   show_progress_bar: false,
   preload_images: imgs,
-  override_safe_mode: true,
 });

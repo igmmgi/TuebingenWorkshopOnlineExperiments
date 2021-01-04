@@ -3,13 +3,18 @@
 // https://www.youtube.com/watch?v=ZQd2QEK_Gn4
 // Demo Script written as an example for Tübingen Workshop on Online Experiments
 
-const expName = getFileName();
-const dirName = getDirName();
 const vpNum = genVpNum();
 
 // Can't use PHP code on Pavlovia?
-const version = getVersionNumber(vpNum, 4);
-console.log(version);
+// Two options
+// Option 1: Assign version randomly based on mod of time
+const version1 = getVersionNumber(vpNum, 4);
+console.log(version1);
+
+// Option 2: Consequtive participant numbers provided by the following link
+// https://moryscarter.com/vespr/pavlovia.php
+const version2 = getVersionNumber(jsPsych.data.urlVariables().participant, 4);
+console.log(version2);
 
 ////////////////////////////////////////////////////////////////////////
 //                           Exp Parameters                           //
@@ -17,10 +22,10 @@ console.log(version);
 const prms = {
   nTrlsP: 10, // number of trials in first block (practice)
   nTrlsE: 10, // number of trials in subsequent blocks
-  nBlks: 2, // number of blocks
+  nBlks: 1, // number of blocks
   fixDur: 500, // duration of the fixation cross
   cueDur: 200, // cue duration
-  fbDur: 1000, // feedback duration
+  fbDur: 500, // feedback duration
   cti: 0, // cue-target-interval duration
   targetPos: 300, // target position +-
   waitDur: 1000, // duration to wait following ...
@@ -127,9 +132,9 @@ const block_feedback = {
 };
 
 const imgs = [
-  "../images/arrow_left.png",
-  "../images/arrow_right.png",
-  "../images/target.png",
+  "images/arrow_left.png",
+  "images/arrow_right.png",
+  "images/target.png",
 ];
 
 // prettier-ignore
@@ -174,6 +179,12 @@ const pavolvia_init = {
 const pavolvia_finish = {
   type: "pavlovia",
   command: "finish",
+  dataFilter: function () {
+    return filterDataPavlovia([
+      { stim: "posner_cue" },
+      { stim: "posner_target" },
+    ]);
+  },
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -189,7 +200,7 @@ function genExpSeq() {
   exp.push(hideMouseCursor);
 
   exp.push(welcome_en);
-  // exp.push(vpInfoForm_en);
+  exp.push(vpInfoForm_en);
   exp.push(task_instructions);
 
   for (let blk = 0; blk < prms.nBlks; blk++) {

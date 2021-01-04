@@ -15,22 +15,14 @@ function getFileName() {
   return name.substring(name.lastIndexOf("/") + 1, name.lastIndexOf("."));
 }
 
-function filterDataPavlovia(
-  rows = {},
-  filetype = "csv",
-  colsToIgnore = [
-    "stimulus",
-    "trial_type",
-    "internal_node_id",
-    "trial_index",
-    "time_elapsed",
-  ]
-) {
-  if (filetype === "csv") {
-    return jsPsych.data.get().filter(rows).ignore(colsToIgnore).csv();
-  } else if (filetype === "json") {
-    return jsPsych.data.get().filter(rows).ignore(colsToIgnore).json(true); // true to avoid single line
-  }
+function test() {
+  $.get(
+    "https://moryscarter.com/vespr/pavlovia.php?folder=igmmgi&experiment=my_test_project",
+    function (data, status) {
+      console.log("here");
+    },
+    "html"
+  );
 }
 
 function getNumberOfFiles(url, datDir) {
@@ -54,12 +46,6 @@ function genVpNum() {
   num = num.getTime();
   jsPsych.data.addProperties({ vpNum: num });
   return num;
-}
-
-function getComputerInfo() {
-  "use strict";
-  let pc_info = navigator.userAgent;
-  jsPsych.data.addProperties({ pc_info: pc_info });
 }
 
 function getVersionNumber(num, numberOfVersions) {
@@ -460,7 +446,7 @@ const showMouseCursor = {
 
 const vpInfoForm_en = {
   type: "external-html",
-  url: "/Common/vpInfoForm_en.html",
+  url: "Common/vpInfoForm_en.html",
   cont_btn: "start",
   check_fn: checkVpInfoForm_en,
 };
