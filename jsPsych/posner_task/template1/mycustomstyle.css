@@ -1,0 +1,22 @@
+/* change default background colour */
+.jspsych-display-element {
+  background-color: Grey;
+}
+
+p {
+  font-size: 300px;
+}
+
+.myfont {
+  /* font-family: "Times New Roman"; */
+  font-family: "Courier";
+  font-style: italic;
+  font-size: 100px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  text-align: left;
+  border: 10px solid #000000;
+  word-break: keep-all;
+  text-shadow: 2px 2px 25px red;
+}
