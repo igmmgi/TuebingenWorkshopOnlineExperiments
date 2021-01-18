@@ -1,12 +1,15 @@
 // jsPsych Template
 // Start jsPsych, show "Hello, jsPsych", and wait for key press
 
+
 // our "Hello, jsPsych" stimulus
-const hello = {
-  type: "html-keyboard-response",
-  stimulus: `<p class = 'myfont'>🏁 🙈 🤣 😀 ♧  ☊ ↓ <br>
-  This is some text that should span more than one line!
-  We can write lots of instructions here! This will automatically add line breaks!`,
+const hello = { 
+    type: "html-keyboard-response", 
+    stimulus: `<p class = 'myfont'>
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+    vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+    gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.`
 };
 
 const goodbye = {
@@ -22,9 +25,18 @@ let exp = [];
 exp.push(hello);
 exp.push(goodbye);
 
+const my_emojis = ["🤑", "🏁"]
+
+for (let i = 0; i < my_emojis.length; i++) {
+    exp.push({
+        type: "html-keyboard-response",
+        stimulus: `<p class="myfont">` + my_emojis[i] + `</p>`,
+    });
+}
+
 jsPsych.init({
-  timeline: exp,
-  on_finish: function () {
-    jsPsych.data.displayData();
-  },
+    timeline: exp,
+    on_finish: function () {
+        jsPsych.data.displayData();
+    },
 });
