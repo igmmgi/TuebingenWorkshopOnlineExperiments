@@ -1,10 +1,6 @@
 \documentclass[t]{beamer}
 \setbeamercovered{invisible}
 
-% required packages
-\usepackage[german]{babel}
-\usepackage{times}
-
 %%%%%%%%%%%%%%%%%%%%%%% Latex theme + Author and Uni Info %%%%%%%%%%%%%%%%%%%%%
 \usetheme{UTedit}
 
@@ -24,11 +20,11 @@
     \frametitle{jsPsych}
     \begin{itemize}
         \item What is jsPsych?
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item JavaScript library for running experiments in the browser
             \end{itemize}
         \item Useful links
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item \href{https://www.jspsych.org/}{\color{blue} jsPsych Website}
                 \item \href{https://www.github.com/jspsych/jsPsych/}{\color{blue}jsPsych Code}
                 \item \href{https://www.pubmed.ncbi.nlm.nih.gov/24683129/}{\color{blue}jsPsych Paper}
@@ -60,23 +56,23 @@
     \frametitle{jsPsych}
     \begin{itemize}
         \item What do we need?
-            \begin{itemize}\scriptsize
-                \item Text Editor (Vim, Visual Studio Code, Sublime Text, R-Studio etc.)
-                    \begin{itemize}\tiny
+            \begin{itemize}
+                \item Text Editor (Vim, VS Code, Sublime Text, R-Studio etc.)
+                    \begin{itemize}
                         \item Need to edit .js (95\%), .html, and .cs files
                         \item Syntax highlighting!
                     \end{itemize}
                 \item Web-Browser  
-                    \begin{itemize}\tiny
+                    \begin{itemize}
                         \item Need to test on most commonly used browsers (e.g., Firefox, Chrome, and Safari)
                     \end{itemize}
                 \item jsPsych library
                 \item Web Server (e.g., Pavlovia)
-                    \begin{itemize}\tiny
+                    \begin{itemize}
                         \item Not required for local development/initial testing
                     \end{itemize}
                 \item Git (required for interaction with Pavlovia + useful in general for code development) 
-                    \begin{itemize}\tiny
+                    \begin{itemize}
                         \item \href{https://git-scm.com/}{Git link}
                     \end{itemize}
             \end{itemize}
@@ -90,9 +86,9 @@
     \frametitle{Git}
     \begin{itemize}
         \item What is Git?
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item Git is version control software
-                    \begin{itemize}\tiny
+                    \begin{itemize}
                         \item We can use it to keep track of changes in our experiment code (complete history of changes)
                         \item Avoid need for myexperiment180121.js, myexperiment190121\_test\_change.js, myexperiment190121\_other\_change.js, and so on
                         \item Makes collaboration easier (share code, use code from others)
@@ -101,10 +97,10 @@
         \item What is GitHub/GitLab
             \begin{itemize}
                 \item Two separate online hosts for Git projects
-                    \begin{itemize}\tiny
+                    \begin{itemize}
                         \item \href{https://github.com/}{GitHub}
                         \item \href{https://gitlab.com/}{GitLab}
-                    \end{itemize}\tiny
+                    \end{itemize}
             \end{itemize}
     \end{itemize}
 \end{frame}
@@ -115,7 +111,7 @@
     \frametitle{Git Basics: Walkthrough I}
     \begin{itemize}
         \item Create a new project (local computer)
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item README.md file
                 \item git init . directory
                 \item git add .
@@ -123,20 +119,13 @@
                 \item git commit 
             \end{itemize}
         \item Create a repository on GitHub\footnotemark or GitLab
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item Your account $\rightarrow$ Your repositories $\rightarrow$ New 
                 \item Repository name $\rightarrow$ Create repository
-                \item …or push an existing repository from the command line
+                \item Option $\rightarrow$ …or push an existing repository from the command line
             \end{itemize}
-        \item Upload our local repository to GitHub or GitLab
-            \begin{itemize}\scriptsize
-                \item git remote add origin https://github.com/igmmgi/XXX.git
-                \item git branch -M main\footnotemark
-                \item git push -u origin main
             \end{itemize}
-    \end{itemize}
     \footnotetext[1]{\tiny Instructions refer to GitHub}
-    \footnotetext[2]{\tiny master to main name change 2020/2021}
 \end{frame}
 
 
@@ -144,21 +133,28 @@
 \begin{frame}[fragile]
     \frametitle{Git Basics: Walkthrough II}
     \begin{itemize}
+        \item Upload our local repository to GitHub or GitLab
+            \begin{itemize}
+                \item git remote add origin https://github.com/igmmgi/XXX.git
+                \item git branch -M main\footnotemark
+                \item git push -u origin main
+            \end{itemize}
         \item Locate project to clone (on GitHub/GitLab)
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item Code $\rightarrow$ Copy/Paste
             \end{itemize}
         \item Clone an existing project (local computer)
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item git clone XXX 
                 \item git log
             \end{itemize}
-        \item Clone TuebingenWorkshopOnlineExperiments which contains course materials
+        \item Clone TuebingenWorkshopOnlineExperiments which contains the course materials
             \begin{itemize}\scriptsize
                 \item git clone https://github.com/igmmgi/TuebingenWorkshopOnlineExperiments.git
                 \item git pull
             \end{itemize}
     \end{itemize}
+    \footnotetext[2]{\tiny master to main name change 2020/2021}
 \end{frame}
 
 
@@ -167,7 +163,7 @@
     \frametitle{jsPsych: Getting Started}
     \begin{itemize}
         \item Three related technologies 
-            \begin{itemize}\scriptsize
+            \begin{itemize}
                 \item HTML (Hypertext Markup Language) with file extension .html 
                     \begin{itemize}
                         \item Controls the content on the webpage
@@ -191,14 +187,17 @@
     \begin{itemize}
         \item Useful resourses
             \begin{itemize}
-                \item \href{https://www.w3schools.com/html/default.asp}{w3schools.com HTML}
-                \item \href{https://www.w3schools.com/css/default.asp}{w3schools.com CSS}
-                \item \href{https://www.w3schools.com/js/DEFAULT.asp}{w3schools.com javascript}
+                \item \href{https://www.w3schools.com/html/default.asp}{w3schools.com (HTML)}
+                \item \href{https://www.w3schools.com/css/default.asp}{w3schools.com (CSS)}
+                \item \href{https://www.w3schools.com/js/DEFAULT.asp}{w3schools.com (javascript)}
             \end{itemize}
-        \item example.html
-        \item example_with_inline_css.html
-        \item example_with_spearate_css_file.html and example.css
-        \item example_with_javascript.html
+        \item Demo Files
+            \begin{itemize}
+                \item example.html
+                \item example\_with\_inline\_css.html
+                \item example\_with\_spearate\_css\_file.html and example.css
+                \item example\_with\_javascript.html
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
@@ -210,15 +209,16 @@
         \item Combination of javascript, html, css
         \item Speficic high-level code for behavioural experiments 
             \begin{itemize}
-                \item present text/images/sounds/movies
-                \item record keypresses, reaction time etc.
-                \item organise data 
+                \item Present text/images/sounds/movies
+                \item Record keypresses, reaction time etc.
+                \item Organise data 
+                \item Randomisation procedures
             \end{itemize}
         \item Built around the idea pre-defined trial-types or plugins
             \begin{itemize}
-                \item easy to use 
-                \item requires very little actual coding
-                \item cover a wide-rage of use cases 
+                \item Easy to use 
+                \item Requires very little actual coding
+                \item Covers a wide-rage of use cases 
                 \item We can also create custom plugins for more specific experients (requires a little bit of coding)
             \end{itemize}
     \end{itemize}
@@ -227,9 +227,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]
-    \frametitle{jsPsych: A first "experiment"}
+    \frametitle{jsPsych: A first ``experiment"}
     \begin{itemize}
-        \item 
+        \item Demo Files
+            \begin{itemize}
+                \item
+            \end{itemize}
     \end{itemize}
 \end{frame}
 
