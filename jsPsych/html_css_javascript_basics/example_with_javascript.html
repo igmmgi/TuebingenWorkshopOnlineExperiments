@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Title</title>
+    <link href="example.css" rel="stylesheet" />
+  </head>
+  <body>
+    <script>
+      let my_random_float = Math.random();
+      let my_random_int = Math.floor(Math.random() * 5);
+      let animals = ["cat", "dog", "horse", "pig", "cow"];
+      let my_random_number = Math.random();
+      document.body.innerHTML =
+        "<p class='myfont'>" +
+        my_random_number +
+        "<br>" +
+        animals[my_random_int] +
+        "</p>";
+    </script>
+  </body>
+</html>
