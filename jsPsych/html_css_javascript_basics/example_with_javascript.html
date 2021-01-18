@@ -6,13 +6,12 @@
   </head>
   <body>
     <script>
-      let my_random_float = Math.random();
+      let my_random_float = Math.random().toFixed(2);
       let my_random_int = Math.floor(Math.random() * 5);
       let animals = ["cat", "dog", "horse", "pig", "cow"];
-      let my_random_number = Math.random();
       document.body.innerHTML =
         "<p class='myfont'>" +
-        my_random_number +
+        my_random_float +
         "<br>" +
         animals[my_random_int] +
         "</p>";
