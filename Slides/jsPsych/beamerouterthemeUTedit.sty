@@ -1,0 +1,59 @@
+\ProvidesPackage{beamerouterthemeUTedit}
+\mode<presentation>
+
+% get compiled date
+% \date{}
+
+% turn-off navigation symbols
+\setbeamertemplate{navigation symbols}{} 
+
+\setbeamercolor*{author in head/foot}{parent=palette tertiary}
+\setbeamercolor*{title in head/foot}{parent=palette secondary}
+\setbeamercolor*{date in head/foot}{parent=palette tertiary}
+\setbeamercolor*{section in head/foot}{parent=palette tertiary}
+\setbeamercolor*{subsection in head/foot}{parent=palette primary}
+\setbeamerfont{section in head/foot}{series=\bfseries}
+
+\defbeamertemplate*{footline}{UTedit theme}
+{
+    \leavevmode
+    \hbox{
+        \begin{beamercolorbox}[wd=.666666 \paperwidth, ht=2.25ex, dp=1ex, left]{author in head/foot}
+            \usebeamerfont{author in head/foot}~~\insertshortauthor:~~~~\insertshorttitle~~~~Slide \insertframenumber{}/\inserttotalframenumber{}
+            \hspace*{4mm} 
+        \end{beamercolorbox}
+
+        \begin{beamercolorbox}[wd=.333333 \paperwidth, ht=2.25ex, dp=1ex, right]{title in head/foot}
+            \usebeamerfont{title in head/foot}\insertdate~~~\insertshortinstitute
+            \hspace*{2mm} 
+        \end{beamercolorbox}
+    }
+    \vskip 0pt
+}
+
+\defbeamertemplate*{headline}{UTedit theme}
+{
+    \leavevmode
+    \hbox{
+
+        \begin{beamercolorbox}[wd=.3 \paperwidth, ht=8mm, dp=1ex, left]{subsection in head/foot}
+            \hspace*{2mm} 
+            \includegraphics[width=22mm, keepaspectratio=true]{logo.pdf}
+        \end{beamercolorbox}
+
+        \begin{beamercolorbox}[wd=.7 \paperwidth, ht=5ex, dp=2 ex, rightskip=1cm, right]{section in head/foot}
+            \usebeamerfont{subsection in head/foot}\insertsectionhead~~
+            \hspace*{4mm} 
+            \newline 
+            \vskip 0pt
+            \usebeamerfont{section in head/foot}\insertsubsectionhead~~
+            \hspace*{4mm} 
+        \end{beamercolorbox}
+    }
+    \vskip 0pt
+    \line(1,0){400}
+}
+\setbeamersize{text margin left=1em,text margin right=1 cm}
+
+\mode
+<all>

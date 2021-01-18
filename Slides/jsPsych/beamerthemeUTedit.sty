@@ -1,0 +1,22 @@
+% Based on work by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\DeclareOptionBeamer{compress}{\beamer@compresstrue}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+\definecolor{rot}{RGB}{165, 30, 55}
+
+\useoutertheme{UTedit}
+\usecolortheme[named=rot]{structure}
+
+\setbeamercolor{separation line}{use=structure,bg=structure.fg!50!bg}
+
+\mode
+<all>

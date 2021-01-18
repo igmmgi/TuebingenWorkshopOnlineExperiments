@@ -1,0 +1,166 @@
+\documentclass[t]{beamer}
+\setbeamercovered{invisible}
+
+% required packages
+\usepackage[german]{babel}
+\usepackage{times}
+
+%%%%%%%%%%%%%%%%%%%%%%% Latex theme + Author and Uni Info %%%%%%%%%%%%%%%%%%%%%
+\usetheme{UTedit}
+
+\title{Online Experiments with jsPsych}
+\subtitle{Introduction to jsPsych}
+\author[Mackenzie]{\inst{}}
+\institute[Universit\"at T\"ubingen]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Presentation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{frame}
+    \titlepage{}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{jsPsych}
+    \begin{itemize}
+        \item What is jsPsych?
+            \begin{itemize}\scriptsize
+                \item JavaScript library for running experiments in the browser
+            \end{itemize}
+        \item Useful links
+            \begin{itemize}\scriptsize
+                \item \href{https://www.jspsych.org/}{\color{blue} jsPsych Website}
+                \item \href{https://www.github.com/jspsych/jsPsych/}{\color{blue}jsPsych Code}
+                \item \href{https://www.pubmed.ncbi.nlm.nih.gov/24683129/}{\color{blue}jsPsych Paper}
+                \item \href{https://www.youtube.com/watch?v=BuhfsIFRFe8}{\color{blue}YouTube Tutorial 1}
+                \item \href{https://www.youtube.com/watch?v=8Nj3qAxY_ss}{\color{blue}YouTube Tutorial 2}
+                \item \href{https://www.youtube.com/watch?v=LP7o0iAALik}{\color{blue}YouTube Tutorial 3}
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{jsPsych}
+    \begin{itemize}
+        \item Running behavioural studies online: Is it valid?
+        \item Useful references
+            \begin{itemize}\scriptsize
+                \item \href{https://peerj.com/articles/9414/}{Bridges, D., Pitiot, A., MacAskill, M. R., \& Peirce, J. W. (2020). The timing mega-study: comparing a range of experiment generators, both lab-based and online. PeerJ, 8, e9414.}
+                \item \href{https://link.springer.com/article/10.3758/s13428-015-0567-2}{de Leeuw, Joshua R., and Benjamin A. Motz. "Psychophysics in a Web browser? Comparing response times collected with JavaScript and Psychophysics Toolbox in a visual search task." Behavior Research Methods 48.1 (2016): 1-12.}
+                \item \href{https://link.springer.com/article/10.3758/s13428-015-0678-9}{Hilbig, B. E. (2016). Reaction time effects in lab-versus Web-based research: Experimental evidence. Behavior Research Methods, 48(4), 1718-1724.}
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{jsPsych}
+    \begin{itemize}
+        \item What do we need?
+            \begin{itemize}\scriptsize
+                \item Text Editor (Vim, Visual Studio Code, Sublime Text, R-Studio etc.)
+                    \begin{itemize}\tiny
+                        \item Need to edit .js (95\%), .html, and .cs files
+                        \item Syntax highlighting!
+                    \end{itemize}
+                \item Web-Browser  
+                    \begin{itemize}\tiny
+                        \item Need to test on most commonly used browsers (e.g., Firefox, Chrome, and Safari)
+                    \end{itemize}
+                \item jsPsych library
+                \item Web Server (e.g., Pavlovia)
+                    \begin{itemize}\tiny
+                        \item Not required for local development/initial testing
+                    \end{itemize}
+                \item Git (required for interaction with Pavlovia + useful in general for code development) 
+                    \begin{itemize}\tiny
+                        \item \href{https://git-scm.com/}{Git link}
+                    \end{itemize}
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Git}
+    \begin{itemize}
+        \item What is Git?
+            \begin{itemize}\scriptsize
+                \item Git is version control software
+                    \begin{itemize}\tiny
+                        \item We can use it to keep track of changes in our experiment code (complete history of changes)
+                        \item Avoid need for myexperiment180121.js, myexperiment190121\_test\_change.js, myexperiment190121\_other\_change.js, and so on
+                        \item Makes collaboration easier (share code, use code from others)
+                    \end{itemize}
+            \end{itemize}
+        \item What is GitHub/GitLab
+            \begin{itemize}
+                \item Two separate online hosts for Git projects
+                    \begin{itemize}\tiny
+                        \item \href{https://github.com/}{GitHub}
+                        \item \href{https://gitlab.com/}{GitLab}
+                    \end{itemize}\tiny
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Git Basics: Walkthrough I}
+    \begin{itemize}
+        \item Create a new project (local computer)
+            \begin{itemize}\scriptsize
+                \item README.md file
+                \item git init . directory
+                \item git add .
+                \item git status 
+                \item git commit 
+            \end{itemize}
+        \item Create a repository on GitHub\footnotemark or GitLab
+            \begin{itemize}\scriptsize
+                \item Your account $\rightarrow$ Your repositories $\rightarrow$ New 
+                \item Repository name $\rightarrow$ Create repository
+                \item …or push an existing repository from the command line
+            \end{itemize}
+        \item Upload our local repository to GitHub or GitLab
+            \begin{itemize}\scriptsize
+                \item git remote add origin https://github.com/igmmgi/XXX.git
+                \item git branch -M main\footnotemark
+                \item git push -u origin main
+            \end{itemize}
+    \end{itemize}
+    \footnotetext[1]{\tiny Instructions refer to GitHub}
+    \footnotetext[2]{\tiny master to main name change 2020/2021}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Git Basics: Walkthrough II}
+    \begin{itemize}
+        \item Locate project to clone (on GitHub/GitLab)
+            \begin{itemize}\scriptsize
+                \item Code $\rightarrow$ Copy/Paste
+            \end{itemize}
+        \item Clone an existing project (local computer)
+            \begin{itemize}\scriptsize
+                \item git clone XXX 
+                \item git log
+            \end{itemize}
+        \item Clone TuebingenWorkshopOnlineExperiments which contains course materials
+            \begin{itemize}\scriptsize
+                \item git clone https://github.com/igmmgi/TuebingenWorkshopOnlineExperiments.git
+                \item git pull
+            \end{itemize}
+    \end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
