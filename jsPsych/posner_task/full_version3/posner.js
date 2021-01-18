@@ -52,7 +52,7 @@ const task_instructions = {
 ////////////////////////////////////////////////////////////////////////
 const fixation_cross = {
   type: "html-keyboard-response",
-  stimulus: "<p style='font-size: 50px; color: black;'> ＋</p>", // &#65291;
+  stimulus: "<p style='font-size: 50px; color: black;'>＋</p>", // &#65291;
   choices: jsPsych.NO_KEYS,
   trial_duration: prms.fixDur,
   post_trial_gap: 0,
