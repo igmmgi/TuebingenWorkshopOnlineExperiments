@@ -3,8 +3,15 @@
 // https://www.youtube.com/watch?v=ZQd2QEK_Gn4
 // Demo Script written as an example for Tübingen Workshop on Online Experiments
 
-const expName = getFileName();
-const dirName = getDirName();
+function genVpNum() {
+  // Participant number based on time
+  "use strict";
+  let num = new Date();
+  num = num.getTime();
+  jsPsych.data.addProperties({ vpNum: num });
+  return num;
+}
+
 const vpNum = genVpNum();
 
 ////////////////////////////////////////////////////////////////////////
@@ -147,11 +154,30 @@ const trial_timeline = {
 ////////////////////////////////////////////////////////////////////////
 //                             Save Data                              //
 ////////////////////////////////////////////////////////////////////////
+function saveDataLocal(
+  filename,
+  rows = {},
+  filetype = "csv",
+  colsToIgnore = [
+    "stimulus",
+    "trial_type",
+    "internal_node_id",
+    "trial_index",
+    "time_elapsed",
+  ]
+) {
+  jsPsych.data
+    .get()
+    .filter(rows)
+    .ignore(colsToIgnore)
+    .localSave(filetype, filename + "." + filetype);
+}
+
 const save_data = {
   type: "call-function",
   func: function () {
-    let data_filename = dirName + "data/" + expName + "_" + vpNum;
-    saveData("/Common/write_data_json.php", data_filename, [
+    let data_filename = "posner_" + vpNum; // saves to download folder
+    saveDataLocal(data_filename, [
       { stim: "posner_cue" },
       { stim: "posner_target" },
     ]);

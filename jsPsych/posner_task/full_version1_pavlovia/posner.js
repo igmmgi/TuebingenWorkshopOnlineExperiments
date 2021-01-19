@@ -179,12 +179,6 @@ const pavolvia_init = {
 const pavolvia_finish = {
   type: "pavlovia",
   command: "finish",
-  dataFilter: function () {
-    return filterDataPavlovia([
-      { stim: "posner_cue" },
-      { stim: "posner_target" },
-    ]);
-  },
 };
 
 ////////////////////////////////////////////////////////////////////////
