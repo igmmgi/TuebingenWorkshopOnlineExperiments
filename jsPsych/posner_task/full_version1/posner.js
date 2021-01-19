@@ -179,7 +179,7 @@ const save_data = {
   func: function () {
     let data_filename = "posner_" + vpNum; // saves to download folder
     saveDataLocal(data_filename, [
-      { stim: "posner_cue" },
+      //  { stim: "posner_cue" },
       { stim: "posner_target" },
     ]);
   },
