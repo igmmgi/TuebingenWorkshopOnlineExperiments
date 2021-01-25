@@ -124,10 +124,10 @@
       <CodeComponent name="countBlocks">
         <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Experiment" updates="constant" val="blockNo = 0" valType="extendedCode"/>
-        <Param name="Begin JS Experiment" updates="constant" val="blockNo = 0;&amp;#10;" valType="extendedCode"/>
-        <Param name="Begin JS Routine" updates="constant" val="blockNo += 1;&amp;#10;nCorr = 0;&amp;#10;nTrials = 0;&amp;#10;" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="blockNo += 1&amp;#10;nCorr = 0&amp;#10;nTrials = 0" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="blockNo = 0&amp;#10;blockMsg = []&amp;#10;trialPick = []" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="blockNo = 0;&amp;#10;blockMsg = [];&amp;#10;trialPick = [];&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="blockNo += 1;&amp;#10;nCorr = 0;&amp;#10;nTrials = 0;&amp;#10;if (((blockNo === 1) || (blockNo === 4))) {&amp;#10;    trialPick = &quot;0:6&quot;;&amp;#10;    blockMsg = &quot;Creature practice&quot;;&amp;#10;} else {&amp;#10;    if (((blockNo === 2) || (blockNo === 5))) {&amp;#10;        trialPick = &quot;6:12&quot;;&amp;#10;        blockMsg = &quot;Feature practice&quot;;&amp;#10;    } else {&amp;#10;        trialPick = &quot;0:12&quot;;&amp;#10;        blockMsg = &quot;Mixed block&quot;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="blockNo += 1&amp;#10;nCorr = 0&amp;#10;nTrials = 0&amp;#10;if blockNo == 1 or blockNo == 4:&amp;#10;    trialPick = '0:6'&amp;#10;    blockMsg = 'Creature practice'&amp;#10;elif blockNo == 2 or blockNo == 5:&amp;#10;    trialPick = '6:12'&amp;#10;    blockMsg = 'Feature practice'&amp;#10;else: &amp;#10;    trialPick = '0:12'&amp;#10;    blockMsg = 'Mixed block'" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Auto-&gt;JS" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
@@ -158,7 +158,7 @@
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
         <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
-        <Param name="text" updates="set every repeat" val="$'This is block number ' + str(blockNo) + ' of 6. \n \n Remember: \n Show mapping here. \n \n Continue with any key!'&amp;#10;&amp;#10;" valType="extendedStr"/>
+        <Param name="text" updates="set every repeat" val="$'This is block number ' + str(blockNo) + ' of 6. \n \n' + blockMsg + '\n Remember: \n Show mapping here. \n \n Continue with any key!'&amp;#10;&amp;#10;" valType="extendedStr"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
       </TextComponent>
@@ -257,7 +257,7 @@
     </LoopInitiator>
     <Routine name="blockInstr"/>
     <LoopInitiator loopType="TrialHandler" name="trials">
-      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="Selected rows" updates="None" val="$trialPick" valType="str"/>
       <Param name="conditions" updates="None" val="[OrderedDict([('targetWord', 'dragon'), ('targetType', 'creature'), ('targetCond', 'abstract'), ('corrKey', 'i'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'troll'), ('targetType', 'creature'), ('targetCond', 'abstract'), ('corrKey', 'i'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'cyclops'), ('targetType', 'creature'), ('targetCond', 'abstract'), ('corrKey', 'i'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'beetle'), ('targetType', 'creature'), ('targetCond', 'concrete'), ('corrKey', 'e'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'dolphin'), ('targetType', 'creature'), ('targetCond', 'concrete'), ('corrKey', 'e'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'horse'), ('targetType', 'creature'), ('targetCond', 'concrete'), ('corrKey', 'e'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'abstract'), ('targetType', 'feature'), ('targetCond', 'abstract'), ('corrKey', 'i'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'universal'), ('targetType', 'feature'), ('targetCond', 'abstract'), ('corrKey', 'i'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'general'), ('targetType', 'feature'), ('targetCond', 'abstract'), ('corrKey', 'i'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'specific'), ('targetType', 'feature'), ('targetCond', 'concrete'), ('corrKey', 'e'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'detailed'), ('targetType', 'feature'), ('targetCond', 'concrete'), ('corrKey', 'e'), ('mapping', 'congruent')]), OrderedDict([('targetWord', 'defined'), ('targetType', 'feature'), ('targetCond', 'concrete'), ('corrKey', 'e'), ('mapping', 'congruent')])]" valType="str"/>
       <Param name="conditionsFile" updates="None" val="ConditionsCongruent.xlsx" valType="str"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
