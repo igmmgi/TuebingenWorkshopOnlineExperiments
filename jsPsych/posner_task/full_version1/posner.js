@@ -180,11 +180,11 @@ const save_data = {
     let data_filename = "posner_" + vpNum; // saves to download folder
     console.log(data_filename);
     saveDataLocal(data_filename, [
-      //  { stim: "posner_cue" },
+      { stim: "posner_cue" },
       { stim: "posner_target" },
     ]);
   },
-  timing_post_trial: 200,
+  timing_post_trial: 500,
 };
 
 ////////////////////////////////////////////////////////////////////////

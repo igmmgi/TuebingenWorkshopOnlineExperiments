@@ -3,8 +3,15 @@
 // https://www.youtube.com/watch?v=ZQd2QEK_Gn4
 // Demo Script written as an example for Tübingen Workshop on Online Experiments
 
-const expName = getFileName();
-const dirName = getDirName();
+function genVpNum() {
+  // Participant number based on time
+  "use strict";
+  let num = new Date();
+  num = num.getTime();
+  jsPsych.data.addProperties({ vpNum: num });
+  return num;
+}
+
 const vpNum = genVpNum();
 
 ////////////////////////////////////////////////////////////////////////
@@ -13,7 +20,7 @@ const vpNum = genVpNum();
 const prms = {
   nTrlsP: 10, // number of trials in first block (practice)
   nTrlsE: 10, // number of trials in subsequent blocks
-  nBlks: 2, // number of blocks
+  nBlks: 1, // number of blocks
   fixDur: 500, // duration of the fixation cross
   cueDur: 200, // cue duration
   fbDur: 1000, // feedback duration
@@ -156,24 +163,53 @@ const trial_timeline = {
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
+        { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
         { cue_img: imgs[0], cue_dir: "left",  target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'invalid', key: prms.respKeys[1] },
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "left",  x_pos: -prms.targetPos, validity: 'invalid', key: prms.respKeys[0] },
     ],
 };
 
+const resize = {
+  type: "resize",
+  item_width: 3 + 3 / 8,
+  item_height: 2 + 1 / 8,
+  prompt:
+    "<p>Resize the rectangle (click and drag bottom right corner) until it is the same size as a standard bankcard.</p>",
+  pixels_per_unit: 100,
+};
+
 ////////////////////////////////////////////////////////////////////////
 //                             Save Data                              //
 ////////////////////////////////////////////////////////////////////////
+function saveDataLocal(
+  filename,
+  rows = {},
+  filetype = "csv",
+  colsToIgnore = [
+    "stimulus",
+    "trial_type",
+    "internal_node_id",
+    "trial_index",
+    "time_elapsed",
+  ]
+) {
+  jsPsych.data
+    .get()
+    .filter(rows)
+    .ignore(colsToIgnore)
+    .localSave(filetype, filename + "." + filetype);
+}
+
 const save_data = {
   type: "call-function",
   func: function () {
-    let data_filename = dirName + "data/" + expName + "_" + vpNum;
-    saveData("/Common/write_data_json.php", data_filename, [
+    let data_filename = "posner_" + vpNum; // saves to download folder
+    saveDataLocal(data_filename, [
       { stim: "posner_cue" },
       { stim: "posner_target" },
     ]);
   },
-  timing_post_trial: 200,
+  timing_post_trial: 500,
 };
 
 ////////////////////////////////////////////////////////////////////////
@@ -185,6 +221,7 @@ function genExpSeq() {
   let exp = [];
 
   exp.push(fullscreen_on);
+  exp.push(resize);
   exp.push(hideMouseCursor);
 
   exp.push(welcome_en);

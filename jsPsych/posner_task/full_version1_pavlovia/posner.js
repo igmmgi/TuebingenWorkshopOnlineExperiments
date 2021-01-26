@@ -148,6 +148,7 @@ const trial_timeline = {
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
+        { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'valid',   key: prms.respKeys[1] },
         { cue_img: imgs[0], cue_dir: "left",  target_img: imgs[2], target_side: "right", x_pos:  prms.targetPos, validity: 'invalid', key: prms.respKeys[1] },
         { cue_img: imgs[1], cue_dir: "right", target_img: imgs[2], target_side: "left",  x_pos: -prms.targetPos, validity: 'invalid', key: prms.respKeys[0] },
     ],
@@ -192,7 +193,6 @@ function genExpSeq() {
 
   exp.push(fullscreen_on);
   exp.push(hideMouseCursor);
-
   exp.push(welcome_en);
   exp.push(vpInfoForm_en);
   exp.push(task_instructions);
