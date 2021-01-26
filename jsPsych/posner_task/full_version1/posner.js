@@ -20,7 +20,7 @@ const vpNum = genVpNum();
 const prms = {
   nTrlsP: 10, // number of trials in first block (practice)
   nTrlsE: 10, // number of trials in subsequent blocks
-  nBlks: 2, // number of blocks
+  nBlks: 1, // number of blocks
   fixDur: 500, // duration of the fixation cross
   cueDur: 200, // cue duration
   fbDur: 1000, // feedback duration
@@ -178,6 +178,7 @@ const save_data = {
   type: "call-function",
   func: function () {
     let data_filename = "posner_" + vpNum; // saves to download folder
+    console.log(data_filename);
     saveDataLocal(data_filename, [
       //  { stim: "posner_cue" },
       { stim: "posner_target" },
