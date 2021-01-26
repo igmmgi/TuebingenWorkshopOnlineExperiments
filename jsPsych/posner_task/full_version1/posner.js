@@ -8,11 +8,11 @@ function genVpNum() {
   "use strict";
   let num = new Date();
   num = num.getTime();
-  jsPsych.data.addProperties({ vpNum: num });
   return num;
 }
 
 const vpNum = genVpNum();
+jsPsych.data.addProperties({ vpNum: vpNum });
 
 ////////////////////////////////////////////////////////////////////////
 //                           Exp Parameters                           //
